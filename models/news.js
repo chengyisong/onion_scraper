@@ -5,17 +5,17 @@ let newsSchema = new Schema({
         type: String,
         required: true
     },
+    summary: {
+        type: String,
+        required: false
+    },
     link: {
         type: String,
         required: true
     },
-    picURL: {
-        type: String,
-        required: true
-    },
-    note: {
-        type: Schema.Types.ObjectId,
-        ref: "Note"
+    isSaved: {
+        type: Boolean,
+        default: false
     }
 });
 

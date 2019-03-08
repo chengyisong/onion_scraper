@@ -1,0 +1,69 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-warning" id="mainNav">
+    <a class="navbar-brand" href="/">
+        <h2>The Onion Scraper</h2>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/saved">Saved Articles</a>
+            </li>
+        </ul>
+        <button class="btn btn-secondary" id="scrapeBtn">Scrape Onion News</button>
+        <button class="btn btn-secondary" id="clearBtn">Clear Articles</button>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="articles">
+        {{#unless savedNews}}
+        <h2 class="instruction">You have not saved any articles yet. Go to home page and save your favorite onion news.
+        </h2>
+        {{/unless}}
+
+        {{#each savedNews}}
+        <div class='card  cardStyle'>
+            <div class='card-body'>
+                <p class='titleDisplay'>{{title}}</p>
+                <p class='linkDisplay'>
+                    <a href={{link}} target="_blank"> {{link}}</a>
+                </p>
+                {{#if summary}}
+                <p class='summaryDisplay'><strong>Summary: </strong>{{summary}}</p>
+                {{/if}}
+                <button id="rmvSaveBtn" data-id={{id}} class="btn btn-outline-secondary">Remove from Save</button>
+                <button id="noteBtn" data-id={{id}} class="btn btn-outline-warning" data-toggle="modal"
+                    data-target="#noteModal">Add Note</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    {{!-- Modal --}}
+    <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="displayNotes"></div>
+                    <div id="newNote">
+                        <textarea rows="4" id="noteInput" placeholder="Add a note..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveNoteBtn">Add Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
